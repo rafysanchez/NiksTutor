@@ -9,11 +9,16 @@ export class ContactService {
   constructor() { }
 
   addContact(contact: Contact) {
-    console.log(contact);
+    contact.ID = this._contactList.length + 1;
     this._contactList.push(contact);
   }
 
-  removeContact(id: number) {
+  editContact(contact: Contact) {
+    const index = this._contactList.findIndex(c => c.ID === contact.ID);
+    this._contactList[index] = contact;
+  }
+
+  deleteContact(id: number) {
     const contact = this._contactList.findIndex(c => c.ID === id);
     this._contactList.splice(contact, 1);
   }

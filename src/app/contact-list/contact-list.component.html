@@ -21,6 +21,9 @@
           <td>{{Contact.LastName}}</td>
           <td>{{Contact.Contact}}</td>
           <td>{{Contact.Email}}</td>
+          <td><mat-icon (click)="editContact(Contact.ID)">edit</mat-icon></td>
+          <td><mat-icon (click)="deleteContact(Contact.ID)">delete</mat-icon></td>
+      
         </tr>
       </table>
     </div>

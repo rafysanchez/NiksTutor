@@ -34,4 +34,20 @@ export class ContactListComponent implements OnInit {
     });
   }
 
+  editContact(id: number) {
+    this.isPopupOpened = true;
+    const contact = this._contactService.getAllContacts().find(c => c.ID === id);
+    const dialogRef = this.dialog.open(ContactComponent, {
+      data: contact
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+    });
+  }
+
+  deleteContact(id: number) {
+    this._contactService.deleteContact(id);
+  }
 }

@@ -25,17 +25,22 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this._contactForm = this._formBuilder.group({
-      ID: [],
-      FirstName: ['', [Validators.required]],
-      LastName: ['', [Validators.required]],
-      Contact: ['', [Validators.required]],
-      Email: ['', [Validators.required]],
+      ID: [this.data.ID],
+      FirstName: [ this.data.FirstName, [Validators.required]],
+      LastName: [ this.data.LastName, [Validators.required]],
+      Contact: [ this.data.Contact, [Validators.required]],
+      Email: [ this.data.Email , [Validators.required]],
     });
   }
 
   onSubmit() {
-    this._contactService.addContact(this._contactForm.value);
-    this.dialogRef.close();
+    if (isNaN(this.data.ID)) {
+      this._contactService.addContact(this._contactForm.value);
+      this.dialogRef.close();
+    } else {
+      this._contactService.editContact(this._contactForm.value);
+      this.dialogRef.close();
+    }
   }
 
 }
