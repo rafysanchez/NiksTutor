@@ -1,11 +1,12 @@
+import { Contact } from './../model/contact';
 import { Injectable } from '@angular/core';
 import { Contact } from '../model/contact';
 
 @Injectable()
 export class ContactService {
 
-  _contactList: Contact[] = [];
-
+  // _contactList: Contact[{ ID:1, FirstName:'Arruel', LastName:'Cida', Email:'Savenal@dder.com'}] ;
+  _contactList: Contact[]=[];
   constructor() { }
 
   addContact(contact: Contact) {
