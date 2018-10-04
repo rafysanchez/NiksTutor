@@ -9,14 +9,14 @@ import { ContactComponent } from '../contact/contact.component';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-
   isPopupOpened = true;
 
-  constructor(private dialog?: MatDialog,
-    private _contactService?: ContactService) { }
+  constructor(
+    private dialog?: MatDialog,
+    private _contactService?: ContactService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   get ContactList() {
     return this._contactService.getAllContacts();
@@ -28,26 +28,35 @@ export class ContactListComponent implements OnInit {
       data: {}
     });
 
-
     dialogRef.afterClosed().subscribe(result => {
+      // debugger
+      console.log(result.json());
       this.isPopupOpened = false;
     });
   }
 
   editContact(id: number) {
+    // debugger
+    console.log(id);
     this.isPopupOpened = true;
-    const contact = this._contactService.getAllContacts().find(c => c.ID === id);
+    const contact = this._contactService
+      .getAllContacts()
+      .find(c => c.ID === id);
     const dialogRef = this.dialog.open(ContactComponent, {
       data: contact
     });
 
-
     dialogRef.afterClosed().subscribe(result => {
+      // tslint:disable-next-line:no-debugger
+      debugger;
+      // console.log(result.value);
       this.isPopupOpened = false;
     });
   }
 
   deleteContact(id: number) {
-    this._contactService.deleteContact(id);
+    if (confirm('Excluir?')) {
+      this._contactService.deleteContact(id);
+    }
   }
 }
